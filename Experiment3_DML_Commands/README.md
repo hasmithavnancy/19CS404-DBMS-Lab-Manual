@@ -83,8 +83,11 @@ WHERE supplier_id = 8;
 <img width="631" height="166" alt="image" src="https://github.com/user-attachments/assets/b835fb3a-6a58-48a9-9016-d763ceb499af" />
 
 ```sql
-<img width="1280" height="300" alt="image" src="https://github.com/user-attachments/assets/0fac39eb-1375-49d4-a01b-7eaf07dd361c" />
-
+UPDATE Products
+SET 
+    sell_price = sell_price * 1.10
+WHERE 
+    category = 'Bakery';
 ```
 
 **Output:**
