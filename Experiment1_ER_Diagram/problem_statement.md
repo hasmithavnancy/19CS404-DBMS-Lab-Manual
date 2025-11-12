@@ -47,8 +47,7 @@ Design a database for patient management, appointments, medical records, and bil
 
 # ER Diagram Submission - HASMITHA V NANCY
 
-## Scenario Chosen:
-University
+## Scenario 1: University Database
 
 ## ER Diagram:
 <img width="1207" height="794" alt="Screenshot 2025-08-27 111026" src="https://github.com/user-attachments/assets/46ea1f0f-6f3c-44b8-9a8a-63dadeda4368" />
@@ -90,6 +89,57 @@ Student, Course, Faculty, Department are fundamental academic components.
 Enrollment is a bridge entity for a many-to-many relationship between Students and Courses, while also capturing enrollment metadata (e.g., credits, prerequisites).
 
 Department helps in structuring programs and associating faculty and students.tionships, and assumptions
+
+
+## Scenario 2: Hospital Database 
+
+## ER Diagram:
+
+<img width="1134" height="726" alt="image" src="https://github.com/user-attachments/assets/bf799f5a-8b30-4f3a-9423-5d56f7a77912" />
+
+
+## Entities and Attributes:
+- Patient : PatientID (PK),Name,DOB,Gender,Phone
+- Doctor : DoctorID (PK) , Name ,Phone ,Specialization,DepartmentID (FK)
+- Department : DepartmentID (PK) ,DeptName ,Location
+- Appointment : AppointmentID (PK) ,PatientID (FK) , DoctorID (FK), AppointmentDateTime   , ReasonStatus
+- Medical Record :RecordID (PK) ,PatientID (FK), DoctorID (FK) ,AppointmentID (FK) ,RecordDate , Diagnosis , Treatment
+- Billing : BillID (PK) , AppointmentID (FK) ,Amount , PaymentStatus, PaymentMethod ,BillingDate
+
+## Relationships and Constraints:
+- Patient — Has — Appointment Cardinality: One-to-Many (A patient can have many appointments, each appointment is for one patient)
+
+Participation: Total on Appointment (Every appointment must involve a patient)
+
+- Doctor — Attends — Appointment Cardinality: One-to-Many (A doctor can attend many appointments, but each appointment is with one doctor)
+
+Participation: Total on Appointment
+
+- Appointment — Generates — Medical Record Cardinality: One-to-One (Each appointment generates one medical record, each medical record belongs to one appointment)
+
+Participation: Partial (Not every appointment may generate a record, e.g., cancelled visit)
+
+- Appointment — Has Bill — Billing Cardinality: One-to-One (Each appointment has at most one billing, each bill is for one appointment)
+
+Participation: Partial on Appointment (not all appointments may have billing, e.g., free check-up)
+
+- Doctor — Belongs To — Department Cardinality: Many-to-One (Many doctors belong to one department)
+
+Participation: Total on Doctor (every doctor must belong to a department)
+
+
+## Extension (Prerequisite / Billing):
+- An appointment can generate at most one bill.
+This is represented using a one-to-one relationship between Appointment and Billing, with partial participation on Appointment.
+
+## Design Choices:
+- Appointment is the central entity connecting Patient and Doctor, making it the hub for Medical Records and Billing.
+
+- Medical Record is linked to Appointments instead of directly to patients, ensuring proper context of treatment and diagnosis.
+
+- Billing is linked to Appointments, as charges are generated per visit.
+
+- Department structures doctors, providing a way to organize based on specialization and hospital units.
 
 ## RESULT
 The ER model accurately represents an academic system with students, courses, faculty, departments, enrollments, and supports prerequisites through a recursive course relationship.
