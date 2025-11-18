@@ -1,145 +1,195 @@
-# Experiment 1: Entity-Relationship (ER) Diagram
+# ER Diagram Workshop – Submission Template
 
-## 🎯 Objective:
-To understand and apply the concepts of ER modeling by creating an ER diagram for a real-world application.
+## Objective
+To understand and apply ER modeling concepts by creating ER diagrams for real-world applications.
 
-## 📚 Purpose:
-The purpose of this workshop is to gain hands-on experience in designing ER diagrams that visually represent the structure of a database including entities, relationships, attributes, and constraints.
-
----
-
-## 🧪 Choose One Scenario:
-
-### 🔹 Scenario 1: University Database
-Design a database to manage students, instructors, programs, courses, and student enrollments. Include prerequisites for courses.
-
-**User Requirements:**
-- Academic programs grouped under departments.
-- Students have admission number, name, DOB, contact info.
-- Instructors with staff number, contact info, etc.
-- Courses have number, name, credits.
-- Track course enrollments by students and enrollment date.
-- Add support for prerequisites (some courses require others).
+## Purpose
+Gain hands-on experience in designing ER diagrams that represent database structure including entities, relationships, attributes, and constraints.
 
 ---
 
-### 🔹 Scenario 2: Hospital Database
-Design a database for patient management, appointments, medical records, and billing.
+# Scenario A: City Fitness Club Management
 
-**User Requirements:**
-- Patient details including contact and insurance.
-- Doctors and their departments, contact info, specialization.
-- Appointments with reason, time, patient-doctor link.
-- Medical records with treatments, diagnosis, test results.
-- Billing and payment details for each appointment.
+**Business Context:**  
+FlexiFit Gym wants a database to manage its members, trainers, and fitness programs.
 
----
+**Requirements:**  
+● Members register with details like name, membership type, and start date.
+● Each member can join multiple programs (Yoga, Zumba, Weight Training).
+● Trainers are assigned to programs, and a program may have multiple trainers.
+● Members may book personal training sessions with trainers.
+● Attendance is recorded for each session.
+● Payments are tracked for memberships and sessions
 
-## 📝 Tasks:
-1. Identify entities, relationships, and attributes.
-2. Draw the ER diagram using any tool (draw.io, dbdiagram.io, hand-drawn and scanned).
-3. Include:
-   - Cardinality & participation constraints
-   - Prerequisites for University OR Billing for Hospital
-4. Explain:
-   - Why you chose the entities and relationships.
-   - How you modeled prerequisites or billing.
+### ER Diagram:
 
-# ER Diagram Submission - HASMITHA V NANCY
+<img width="850" height="570" alt="image" src="https://github.com/user-attachments/assets/85cd3ad5-fc97-4085-842b-395032f0732e" />
 
-## Scenario 1: University Database
-
-## ER Diagram:
-<img width="1207" height="794" alt="Screenshot 2025-08-27 111026" src="https://github.com/user-attachments/assets/46ea1f0f-6f3c-44b8-9a8a-63dadeda4368" />
-
-
-## Entities and Attributes:
-Student: Student Name, Register Number, Age, DOB, Year
-Department: Name, Faculties, Lab
-Enrollment: Course Code, Credits
-Course: Name, Course Code, Faculty, Domain, Prerequisites
-Faculty: Name, Department
-
-## Relationships and Constraints:
-Student — Belongs To — Department Cardinality: Many-to-One (Many students belong to one department)
-Participation: Total (Every student must belong to a department)
-
-Student — Does — Enrollment Cardinality: One-to-Many (A student can have many enrollment records)
-Participation: Total (If a student is taking courses, they must be enrolled)
-
-Enrollment — Has — Course Cardinality: Many-to-One (Each enrollment is for one course, but each course can have many enrollments)
-Participation: Total on Enrollment (An enrollment must be for a course)
-
-Student — Enrolls — Course Cardinality: Many-to-Many (A student can enroll in many courses, and a course can have many students)
-Participation: Partial
-
-Course — Teaches — Faculty Cardinality: Many-to-One (Each course is taught by one faculty, a faculty can teach many courses)
-Participation: Total on Course
-
-Faculty — Belongs To — Department Cardinality: Many-to-One (Each faculty member belongs to one department)
-
-## Extension (Prerequisite / Billing):
-A course can have one or more other courses as prerequisites.
-
-This is represented using a many-to-many recursive relationship.
-
-## Design Choices:
-Student, Course, Faculty, Department are fundamental academic components.
-
-Enrollment is a bridge entity for a many-to-many relationship between Students and Courses, while also capturing enrollment metadata (e.g., credits, prerequisites).
-
-Department helps in structuring programs and associating faculty and students.tionships, and assumptions
+### Entities and Attributes
+1. Members
+○ Name
+○ Contact Number
+○ Address
+2. Programs
+○ Type
+○ Fees
+○ Duration
+3. Trainers
+○ Name
+○ Contact Number
+○ Specialization
+4. Payments
+○ Amount
+○ Payment Type
+○ Due Date
+### Relationships and Constraints
+ ● Members ↔ Programs
+A Member can join multiple Programs.
+A Program can have many Members (M:N, resolved via "Joins").
+● Programs ↔ Trainers
+A Program can have many Trainers.
+A Trainer can conduct multiple Programs (M:N, resolved via "Conducts").
+● Members ↔ Trainers (Personal Sessions)
+A Member can book personal sessions with multiple Trainers.
+A Trainer can train multiple Members (M:N).
+● Trainers ↔ Payments
+A Trainer can have many Payments for sessions.
+Each Payment is linked to one Trainer (1:M).
+● Members ↔ Payments
+A Member can make many Payments for memberships and sessions.
+Each Payment is linked to one Member (1:M).
 
 
-## Scenario 2: Hospital Database 
+# Scenario B: City Library Event & Book Lending System
 
-## ER Diagram:
+**Business Context:**  
+The Central Library wants to manage book lending and cultural events.
 
-<img width="1134" height="726" alt="image" src="https://github.com/user-attachments/assets/bf799f5a-8b30-4f3a-9423-5d56f7a77912" />
+**Requirements:**  
+● Members borrow books, with loan dates and return dates tracked.
+● Each book has details such as title, author, and category.
+● The library organizes events; members can register for them.
+● Each event has one or more speakers/authors.
+● Rooms in the library are booked for events and study purposes.
+● Overdue fines apply for late book returns
+
+### ER Diagram:
+
+<img width="840" height="556" alt="image" src="https://github.com/user-attachments/assets/a2da7465-be27-45e8-8b60-faae2bf54542" />
+
+### Entities and Attributes
+
+1.Member
+● Member ID
+● Name
+● Date
+● Contact No
+2.Loan
+● Member ID
+● Due Date
+● Book ID
+● Fine
+● Loan ID
+● Loan Date
+● Return Date
+3.Book
+● Category
+● Book ID
+● Title
+● Author
+4.Event
+● Room ID
+● Event Date
+● Event Name
+● Event ID
+5.Room
+● Room ID
+● Capacity
+● Room Name
+6.Speaker
+● Name
+● Speaker ID
+### Relationships and Constraints
+
+● Member ↔ Loan ↔ Book
+A Member can borrow many Books (M:N, resolved via Loan).
+Each Loan links one Member to one Book.
+● Member ↔ Event
+A Member can register for many Events.
+An Event can have many Members (M:N, resolved via Event_Registration).
+● Event ↔ Room
+Each Event occurs in one Room (1:N).
+● Room ↔ Speaker
+A Room can have many Speakers (M:N).
+● Event ↔ Speaker
+An Event can have multiple Speakers (1:N).
 
 
-## Entities and Attributes:
-- Patient : PatientID (PK),Name,DOB,Gender,Phone
-- Doctor : DoctorID (PK) , Name ,Phone ,Specialization,DepartmentID (FK)
-- Department : DepartmentID (PK) ,DeptName ,Location
-- Appointment : AppointmentID (PK) ,PatientID (FK) , DoctorID (FK), AppointmentDateTime   , ReasonStatus
-- Medical Record :RecordID (PK) ,PatientID (FK), DoctorID (FK) ,AppointmentID (FK) ,RecordDate , Diagnosis , Treatment
-- Billing : BillID (PK) , AppointmentID (FK) ,Amount , PaymentStatus, PaymentMethod ,BillingDate
+# Scenario C: Restaurant Table Reservation & Ordering
 
-## Relationships and Constraints:
-- Patient — Has — Appointment Cardinality: One-to-Many (A patient can have many appointments, each appointment is for one patient)
+**Business Context:**  
+A popular restaurant wants to manage reservations, orders, and billing.
 
-Participation: Total on Appointment (Every appointment must involve a patient)
+**Requirements:**  
+● Customers can reserve tables in advance or walk in.
+● Each reservation includes date, time, and number of guests.
+● Customers place food orders linked to their reservation.
+● Each order contains multiple dishes; dishes belong to categories (starter, main,
+dessert).
+● Bills are generated per reservation, including food and service charges.
+● Waiters are assigned to serve reservations.
 
-- Doctor — Attends — Appointment Cardinality: One-to-Many (A doctor can attend many appointments, but each appointment is with one doctor)
+### ER Diagram:
 
-Participation: Total on Appointment
+<img width="792" height="480" alt="image" src="https://github.com/user-attachments/assets/d6231b65-77fe-423c-bc53-36b77495ac26" />
 
-- Appointment — Generates — Medical Record Cardinality: One-to-One (Each appointment generates one medical record, each medical record belongs to one appointment)
+### Entities and Attributes
+1. Customer
+○ Customer ID
+○ Name
+○ Phone No
+2. Reservation
+○ Reservation ID
+○ Customer ID
+○ Reservation Date and Time
+○ Table ID
+3. Table
+○ Table No
+○ Capacity
+4. Waiter
+○ Waiter ID
+○ Name
+○ Phone No
+5. Order
+○ Order ID
+○ Reservation ID
+○ Order Time
+6. Dish
+○ Dish ID
+○ Name
+○ Price
+7. Bill
+○ Bill ID
+○ Total Amount
 
-Participation: Partial (Not every appointment may generate a record, e.g., cancelled visit)
+### Relationships and Constraints
 
-- Appointment — Has Bill — Billing Cardinality: One-to-One (Each appointment has at most one billing, each bill is for one appointment)
+● Customer ↔ Reservation
+A Customer can make many Reservations.
+Each Reservation is made by one Customer (1:M).
+● Reservation ↔ Table
+Each Reservation is assigned to one Table.
+A Table can be reserved many times (1:M).
+● Reservation ↔ Order
+A Reservation can have many Orders.
+Each Order is linked to one Reservation (1:M).
+● Order ↔ Dish
+An Order can contain many Dishes.
+A Dish can be in many Orders (M:N, resolved via an Order_Dish relationship).
+● Reservation ↔ Bill
+Each Reservation generates one Bill (1:1).
+● Waiter ↔ Reservation
+A Waiter can serve many Reservations.
+Each Reservation is served by one Waiter (1:M).
 
-Participation: Partial on Appointment (not all appointments may have billing, e.g., free check-up)
 
-- Doctor — Belongs To — Department Cardinality: Many-to-One (Many doctors belong to one department)
-
-Participation: Total on Doctor (every doctor must belong to a department)
-
-
-## Extension (Prerequisite / Billing):
-- An appointment can generate at most one bill.
-This is represented using a one-to-one relationship between Appointment and Billing, with partial participation on Appointment.
-
-## Design Choices:
-- Appointment is the central entity connecting Patient and Doctor, making it the hub for Medical Records and Billing.
-
-- Medical Record is linked to Appointments instead of directly to patients, ensuring proper context of treatment and diagnosis.
-
-- Billing is linked to Appointments, as charges are generated per visit.
-
-- Department structures doctors, providing a way to organize based on specialization and hospital units.
-
-## RESULT
-The ER model accurately represents an academic system with students, courses, faculty, departments, enrollments, and supports prerequisites through a recursive course relationship.
